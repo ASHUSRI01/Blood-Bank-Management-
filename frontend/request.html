@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | BloodSys</title>
+    <link rel="stylesheet" href="css/request.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+
+</head>
+<body>
+<!-- Request Modal -->
+<div id="requestModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-btn" id="closeRequestModal">&times;</span>
+        <h2>Blood Request</h2>
+      </div>
+      <div class="modal-body">
+        <form id="requestForm">
+          <div class="form-group">
+            <i class="fas fa-tint"></i>
+            <select id="bloodType" required>
+              <option value="" disabled selected>Select Blood Type</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-flask"></i>
+            <input type="number" id="unitsNeeded" placeholder="Units Required" min="1" required>
+          </div>
+          
+          <button type="submit">
+            <i class="fas fa-search"></i> Find Matching Blood
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-btn" id="closeResultsModal">&times;</span>
+        <h2>Allocation Results</h2>
+      </div>
+      <div class="modal-body" id="resultsContent">
+        <!-- Results will be inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button id="confirmBtn" class="confirm-btn">
+          <i class="fas fa-check"></i> Confirm Allocation
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

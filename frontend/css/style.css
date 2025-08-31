@@ -1,0 +1,425 @@
+:root {
+    --primary-blue: #2b6cb0;
+    --dark-blue: #2c5282;
+    --light-blue: #bee3f8;
+    --bg-color: #f7fafc;
+    --text-dark: #1a202c;
+    --border-color: #e2e8f0;
+    --card-bg: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-dark);
+}
+
+/* Medical-Themed Navbar */
+/* ----- Navbar Styles ----- */
+.navbar {
+    background: linear-gradient(135deg, #3182ce, #2c5282); /* Professional blue gradient */
+    color: white;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    position: relative;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-brand i {
+    color: #fc8181; /* Red medical cross/plus icon */
+    font-size: 1.8rem;
+}
+
+/* Navigation Menu */
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navbar-menu li {
+    position: relative;
+    margin-left: 25px;
+}
+
+.navbar-menu a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-menu a:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-menu a i {
+    font-size: 1.1rem;
+}
+
+/* Mobile Menu Button */
+.menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+}
+
+/* Profile Dropdown - Perfectly Aligned */
+.profile-wrapper {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-avatar:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.profile-avatar i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 200px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.25s ease-out;
+    z-index: 100;
+    border: 1px solid #e2e8f0;
+}
+
+.profile-container:hover .profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: linear-gradient(135deg, #3182ce, #2c5282);
+        width: 280px;
+        flex-direction: column;
+        padding: 15px 0;
+        border-radius: 0 0 0 10px;
+        box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-menu.show {
+        display: flex;
+    }
+
+    .navbar-menu li {
+        margin: 0;
+        width: 100%;
+    }
+
+    .navbar-menu a {
+        padding: 12px 20px;
+        border-radius: 0;
+    }
+
+    .menu-button {
+        display: block;
+        order: 1;
+    }
+
+    .profile-wrapper {
+        margin-left: 15px;
+        order: 2;
+    }
+}
+
+/* ===== Premium Booking Card Design ===== */
+#bookingSection {
+    display: grid;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #f1f5f9;
+}
+
+/* Card Container */
+.booking-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    position: relative;
+    border: none;
+    transform-style: preserve-3d;
+}
+
+/* Medical-Themed Top Accent */
+.booking-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(135deg, #3182ce, #2c5282);  
+}
+
+/* Card Header with Status */
+.booking-card-header {
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Status Badge */
+.booking-card-header span {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(254, 240, 138, 0.9), rgba(251, 191, 36, 0.9));
+    color: #92400e;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.booking-card-header span i {
+    margin-right: 8px;
+}
+
+/* Card Body */
+.booking-card-body {
+    padding: 20px;
+    background: #ffffff;
+}
+
+/* Name (Title) */
+.booking-card-body h3 {
+    font-size: 1.5rem;
+    margin: 0 0 16px 0;
+    color: #1e293b;
+    font-weight: 700;
+    position: relative;
+    display: block;
+}
+
+.booking-card-body h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #e53e3e, #c53030);
+    border-radius: 3px;
+}
+
+/* Details Section */
+.booking-card-body .space-y-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual Detail Items */
+.booking-card-body p {
+    color: #475569;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(241, 245, 249, 0.5);
+    position: relative;
+}
+
+/* Add Gray Line After Each Field */
+.booking-card-body p:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #d1d5db;
+}
+
+/* Remove Hover Effect */
+.booking-card-body p:hover {
+    background: rgba(241, 245, 249, 0.5);
+    transform: none;
+}
+
+/* Icons for Details */
+.booking-card-body i {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 14px;
+    color: white;
+}
+
+.fa-phone { background-color: #10b981; }
+.fa-envelope { background-color: #3b82f6; }
+.fa-tint { background-color: #ef4444; }
+.fa-hospital { background-color: #ef4444; }
+.fa-calendar-alt { background-color: #8b5cf6; }
+.fa-clock { background-color: #6366f1; }
+
+/* Card Footer */
+.booking-card-footer {
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+/* Updated Cancel Button */
+.cancel-btn {
+    background: red; /* Solid red color */
+    color: #ffffff; /* White text for contrast */
+    border: none; /* Remove border for a cleaner look */
+    padding: 12px 0; /* Increased padding for better height */
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center; /* Center the text and icon */
+    width: 100%; /* Span the entire width of the footer */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+
+.cancel-btn:hover {
+    background: #dc2626; /* Slightly darker red on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.cancel-btn i {
+    font-size: 16px;
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Hover Effect for Card */
+.booking-card:hover {
+    transform: translateY(-6px) rotateX(5deg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #bookingSection {
+        max-width: 100%;
+        padding: 16px;
+    }
+
+    .booking-card-body h3 {
+        font-size: 1.25rem;
+    }
+
+    .booking-card-body p {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Animation for New Cards */
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.booking-card {
+    animation: cardEntrance 0.6s ease-out forwards;
+}

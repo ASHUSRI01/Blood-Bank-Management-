@@ -1,0 +1,77 @@
+/* Results Modal Styles */
+#resultsModal .modal-content {
+    max-width: 600px;
+  }
+  
+  .result-summary {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-blue);
+  }
+  
+  .result-summary p {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+  
+  .allocation-table {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .allocation-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .allocation-table th {
+    background: #f1f5f9;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  
+  .allocation-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .allocation-table i {
+    margin-right: 8px;
+    color: var(--primary-blue);
+  }
+  
+  .alert {
+    background: #fffbeb;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #92400e;
+  }
+  
+  .alert i {
+    color: #f59e0b;
+  }
+  
+  .confirm-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .confirm-btn:hover {
+    background: #1e40af;
+  }

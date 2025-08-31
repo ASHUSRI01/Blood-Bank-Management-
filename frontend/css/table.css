@@ -1,0 +1,180 @@
+/* Import Roboto Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Container for styling */
+.container {
+    margin: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+}
+
+/* Title Styling */
+.table-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2D3748;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+}
+
+/* Filter Dropdown */
+.filter-container {
+    margin-bottom: 15px;
+}
+
+.filter-dropdown {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+}
+
+/* Table Styling */
+.table-container {
+    overflow-x: auto;
+}
+/* Alternate row colors only for data rows */
+.data-row:nth-of-type(odd) {
+    background-color: white;
+}
+
+.data-row:nth-of-type(even) {
+    background-color: #f2f2f2; /* Light grey */
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+}
+
+/* Table Header */
+thead {
+    background: linear-gradient(to right, #14B8A6, #4F46E5);
+    color: white;
+}
+
+th {
+    padding: 14px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Table Body */
+tbody {
+    background: white;
+}
+
+tbody tr {
+    border-bottom: 1px solid #D1D5DB;
+}
+
+td {
+    padding: 14px;
+    border-left: 1px solid #D1D5DB;
+    border-right: 1px solid #D1D5DB;
+}
+
+/* Hide details row initially */
+.hidden {
+    display: none;
+}
+.details-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    color: #2D3748;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.detail-item i {
+    color: #14B8A6; /* Match your theme color */
+    font-size: 15px;
+}
+
+/* Details Row Styling */
+.details-row {
+    background-color: #f9f9f9; /* Light background */
+    font-size: 14px;
+    text-align: left;
+    padding: 10px; /* Adds space inside the cell */
+}
+
+.details-row td {
+    padding: 10px; /* Adds space inside the cell */
+    padding-left: 20px; /* Adds space on the left side */
+}
+
+.details-row span {
+    display: inline-block;  /* Ensures proper spacing */
+    margin-right: 25px;  /* Adds more spacing between details */
+    font-weight: 500; /* Slightly bold for readability */
+}
+
+/* Status Styling - Change Text Color */
+.low-stock {
+    color: #F56565 !important ;/* Red for low stock */
+    font-weight: bold;
+}
+
+.available {
+    color: #48BB78 ;  /* Green for available */
+    font-weight: bold;
+}
+
+/* Expand Button Styling */
+.expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.expand-btn i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon when expanded */
+.expand-btn.expanded i {
+    transform: rotate(180deg);  /* Rotates the icon by 180 degrees when clicked */
+}
+
+/* Buttons */
+.btn-action {
+    background: #14B8A6;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+}
+
+.btn-action:hover {
+    background: #0F766E;
+}

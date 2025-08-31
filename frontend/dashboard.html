@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/request.css"> <!-- Linking the separate CSS file for modal styling -->
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<style>
+:root {
+    --primary-blue: #2563eb;
+    --dark-blue: #1e40af;
+    --light-gray: #f1f5f9;
+    --border-color: #d1d5db;
+    --text-dark: #1e293b;
+}
+
+/* Shared Modal Container Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    overflow: auto;
+}
+
+/* Shared Modal Content Box */
+.modal .modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    margin: 5% auto;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+.modal .modal-content .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 28px;
+    color: #64748b;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal .modal-content .close-btn:hover {
+    color: red;
+}
+
+
+
+/* Shared Modal Header */
+.modal .modal-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.modal .modal-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 8px;
+}
+
+.modal .modal-header p {
+    color: #64748b;
+    margin-top: 0;
+}
+
+/* Shared Form Group Layout */
+.modal .form-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.modal .form-group input,
+.modal .form-group select {
+    width: 100%;
+    padding: 14px 14px 14px 44px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-dark);
+    background-color: var(--light-gray);
+    transition: all 0.2s;
+    box-sizing: border-box;
+    height: 48px;
+    line-height: 1.5;
+}
+
+/* Placeholder Styling */
+.modal .form-group input::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+.modal .form-group select:invalid {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+.modal .form-group select option {
+    color: black;
+}
+
+/* Dropdown Arrow */
+.modal .form-group select {
+    appearance: none;
+    background: var(--light-gray) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M7 10l5 5 5-5H7z"/></svg>') no-repeat right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Input Icons */
+.modal .form-group i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 16px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Focus Effects */
+.modal .form-group input:focus,
+.modal .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    caret-color: var(--primary-blue);
+}
+
+/* Submit Buttons */
+.modal button[type="submit"],
+.modal .confirm-btn {
+    background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.modal button[type="submit"]:hover,
+.modal .confirm-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Modal Footer */
+.modal .modal-footer {
+    text-align: center;
+    margin-top: 12px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Responsive Modal */
+@media (max-width: 480px) {
+    .modal .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .modal .form-group input,
+    .modal .form-group select {
+        padding: 10px 14px 10px 36px;
+        height: 44px;
+    }
+
+    .modal .form-group i {
+        left: 12px;
+        font-size: 14px;
+    }
+}
+/* Table Container inside Modal */
+.modal .allocation-table {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+/* Table Styling */
+.modal .allocation-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: white;
+}
+
+/* Header Row */
+.modal .allocation-table th {
+    background-color: var(--primary-blue);
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Body Cells */
+.modal .allocation-table td {
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Row Hover Effect (optional) */
+.modal .allocation-table tr:hover {
+    background-color: #f8fafc;
+}
+</style>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="#">BloodSys</a>
+            <button class="menu-button" id="menu-button">☰</button>
+            <ul class="navbar-menu" id="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a id="request-link" href="request.html">Request</a></li>
+                <li><a id="register-link" href="book.html">Register</a></li>
+                <li><a href="#">Inventory</a></li>
+                <!-- Premium Profile Dropdown -->
+                <li class="profile-container">
+                    <div class="profile-avatar" id="profile-toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="#3B82F6"/>
+                            <path d="M12 13C8.13401 13 5 16.134 5 20H19C19 16.134 15.866 13 12 13Z" fill="#3B82F6"/>
+                        </svg>
+                    </div>
+                    <div class="profile-dropdown">
+                        <button id="logout-btn" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        document.getElementById("menu-button").addEventListener("click", function () {
+            document.getElementById("nav-links").classList.toggle("show");
+        });
+    </script>
+
+    <div class="container">
+        <h2 class="table-title">Blood Inventory</h2>
+    
+        <!-- Filter Dropdown -->
+        <div class="filter-container">
+            <select id="filterOptions" class="filter-dropdown">
+                <option value="all">All Blood Types</option>
+                <option value="recent">Recently Added</option>
+                <option value="expiring-soon">Expiring Soon</option>
+                <option value="low-stock">Low Stock</option>
+            </select>
+        </div>
+    
+        <!-- Table Structure (Data will be dynamically inserted) -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Blood Type</th>
+                        <th>Available Units</th>
+                        <th>Last Updated</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="bloodTable">
+                    <!-- Data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+            
+        <!-- Link JavaScript file -->
+        <script src="js/dashboard.js"></script>
+
+    </div>
+    <!-- Modal Structure -->
+
+<!-- Request Modal -->
+<div id="requestModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-btn" id="closeRequestModal">&times;</span>
+        <h2>Blood Request</h2>
+      </div>
+      <div class="modal-body">
+        <form id="requestForm">
+          <div class="form-group">
+            <i class="fas fa-tint"></i>
+            <select id="bloodType" required>
+              <option value="" disabled selected>Select Blood Type</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-flask"></i>
+            <input type="number" id="unitsNeeded" placeholder="Units Required" min="1" required>
+          </div>
+          
+          <button type="submit">
+            <i class="fas fa-search"></i> Find Matching Blood
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Results Modal -->
+  <div id="resultsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-btn" id="closeResultsModal">&times;</span>
+        <h2>Allocation Results</h2>
+      </div>
+      <div class="modal-body" id="resultsContent">
+        <!-- Results will be inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button id="confirmBtn" class="confirm-btn">
+          <i class="fas fa-check"></i> Confirm Allocation
+        </button>
+      </div>
+    </div>
+  </div>
+    <!-- The Modal HTML -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2> Registration</h2>
+            <p>Book your slot now</p>
+        </div>
+        <div class="modal-body">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <i class="fas fa-user"></i> 
+                    <input type="text" id="name" placeholder="Full Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <i class="fas fa-envelope bg-transparent"></i>
+                    <input type="email" id="email" placeholder="Email" required>
+        
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" id="contact" placeholder="Contact" required>
+                </div>
+                
+                <div class="form-group">
+                    <i class="fas fa-tint"></i>
+                    <select id="blood-type" required>
+                        <option value="" disabled selected hidden>Select Blood Type</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-hospital"></i>
+                    <select id="hospital" placeholder="Hospital" required>
+                        <option value="">Select Hospital</option>
+                        <option value="Hospital A">Hospital A</option>
+                        <option value="Hospital B">Hospital B</option>
+                        <option value="Hospital C">Hospital C</option>
+                    </select>
+                </div>
+
+                <div class="form-group">    
+                    <i class="fas fa-calendar-day"></i> 
+                    <select id="date" placeholder="day" required>
+                        <option value="">Select Slot</option>
+                        <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 02:00 PM">12:00 PM - 02:00 PM</option>
+                        <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-calendar-day"></i> 
+                    <select id="time" placeholder="Slot" required>
+                        <option value="">Select Slot</option>
+                        <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 02:00 PM">12:00 PM - 02:00 PM</option>
+                        <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
+                    </select>
+                </div>
+                
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i> Register
+                </button>
+            </form>
+        </div>
+    
+    </div>
+</div>
+    <script src="js/dashboard.js"></script> <!-- Linking the separate JS file for modal functionality -->
+
+    <!-- Booking Section (Displays the booking cards below the table) css is prent in style.css-->
+    <div id="bookingSection" class="container mx-auto p-6 bg-white shadow-2xl rounded-xl mt-6">
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Booking Details</h2>
+        <div id="donor-card-container" class="space-y-4">
+            <!-- Dynamic booking cards will be inserted here -->
+        </div>
+    </div>
+</body>
+</html>

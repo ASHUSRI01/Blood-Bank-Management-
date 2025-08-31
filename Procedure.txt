@@ -1,0 +1,3 @@
+Step 1: python -m venv venv => Creates a Virtual Environment to manage Dependencies
+Step 2: venv\Scripts\activate => for activating Environment
+Step 3: pip install flask pymongo flask-bcrypt flask-jwt-extended => Installing Packages and Dependencies (Flask and MongoDB)
